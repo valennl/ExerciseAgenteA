@@ -35,11 +35,15 @@ public class JFrameShed extends javax.swing.JFrame {
         model.addColumn("Numero");
         model.addColumn("Estado");
         String[] rows = new String[2];
-        for (Shed s : ShedController.shedList) {
-            rows[0] = String.valueOf(s.getId());
-            rows[1] = s.getStatus();
-            model.addRow(rows);
-            
+        try {
+            for (Shed s : shedController.findAll()) {
+                rows[0] = String.valueOf(s.getId());
+                rows[1] = s.getStatus();
+                model.addRow(rows);
+                
+            }
+        } catch (Exception ex) {
+            MessageUtils.getInstance().showError(ex.getMessage());
         }
     }
 

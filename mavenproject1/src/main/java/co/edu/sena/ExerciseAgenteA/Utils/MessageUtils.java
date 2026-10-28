@@ -43,11 +43,10 @@ public class MessageUtils {
     
     public int showComfirm (String message)
     {
-        JOptionPane.showConfirmDialog(null, message, "confirmacion", JOptionPane.YES_NO_OPTION);
+        return JOptionPane.showConfirmDialog(null, message, "confirmacion", JOptionPane.YES_NO_OPTION);
     }
-    
-    
-    
-    
-    
 }
+    
+    
+    
+    
