@@ -4,9 +4,11 @@
  */
 package co.edu.sena.ExerciseAgenteA.views;
 
+import co.edu.sena.ExerciseAgenteA.Utils.MessageUtils;
 import co.edu.sena.ExerciseAgenteA.controller.IShedController;
 import co.edu.sena.ExerciseAgenteA.controller.ShedController;
 import co.edu.sena.ExerciseAgenteA.model.Shed;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -96,6 +98,7 @@ public class JFrameShed extends javax.swing.JFrame {
 
         jButtonDelete.setText("Eliminar");
         jButtonDelete.setEnabled(false);
+        jButtonDelete.addActionListener(this::jButtonDeleteActionPerformed);
 
         jButtonClean.setText("Limpiar");
         jButtonClean.addActionListener(this::jButtonCleanActionPerformed);
@@ -108,11 +111,14 @@ public class JFrameShed extends javax.swing.JFrame {
 
             }
         ));
+        jTableSheds.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableShedsMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableSheds);
 
-        jTextFieldId.setText("jTextField1");
-
-        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DISPONIBLE", "OCUPADO" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,17 +131,6 @@ public class JFrameShed extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(99, 99, 99)
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jButtonInsert)
                         .addGap(46, 46, 46)
@@ -147,7 +142,17 @@ public class JFrameShed extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,18 +162,16 @@ public class JFrameShed extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInsert)
                     .addComponent(jButtonUpdate)
                     .addComponent(jButtonDelete)
                     .addComponent(jButtonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86))
         );
@@ -198,10 +201,51 @@ public class JFrameShed extends javax.swing.JFrame {
             shed.setStatus(jComboBoxStatus.getSelectedItem().toString());
             
             shedController.insert(shed);
-        } catch (Exception ex) {
-            System.getLogger(JFrameShed.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            MessageUtils.getInstance().showInfo("El registro fue creado exitosamente");
+            clear();
+            fillTable();
+        } catch (NumberFormatException ex) {
+            MessageUtils.getInstance().showError("El numero del galpon debe contener solo numeros");
+        }
+        catch (Exception ex) {
+            MessageUtils.getInstance().showError(ex.getMessage());
         }
     }//GEN-LAST:event_jButtonInsertActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        int option = MessageUtils.getInstance().showComfirm("Esta seguro de eliminar el registro");
+        if (option == JOptionPane.YES_OPTION)
+        {
+            try {
+                shedController.delete(Integer.parseInt(jTextFieldId.getText()));
+                MessageUtils.getInstance().showInfo("Registro eliminado exitosamente");
+                clear();
+                fillTable();
+            } catch (Exception ex) {
+                MessageUtils.getInstance().showError(ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jTableShedsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableShedsMouseClicked
+        int rowSelected = jTableSheds.getSelectedRow();
+        if(rowSelected != -1)
+        {
+            jButtonUpdate.setEnabled(true);
+            jButtonDelete.setEnabled(true);
+            jButtonInsert.setEnabled(false);
+            
+            int numberSelected = Integer.parseInt(jTableSheds.getValueAt(rowSelected, 0).toString());
+            try {
+                //consultar por id
+                Shed shed = shedController.find(numberSelected);
+                jTextFieldId.setText(String.valueOf(shed.getId()));
+                jComboBoxStatus.setSelectedItem(shed.getStatus());
+            } catch (Exception ex) {
+                MessageUtils.getInstance().showError(ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jTableShedsMouseClicked
 
     
     public void clear()
