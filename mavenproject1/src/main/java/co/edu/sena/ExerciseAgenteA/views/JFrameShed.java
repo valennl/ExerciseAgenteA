@@ -1,54 +1,44 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package co.edu.sena.ExerciseAgenteA.views;
 
+import co.edu.sena.ExerciseAgenteA.controller.IShedController;
 import co.edu.sena.ExerciseAgenteA.controller.ShedController;
-import static co.edu.sena.ExerciseAgenteA.controller.ShedController.Sheds;
 import co.edu.sena.ExerciseAgenteA.model.Shed;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Aprendiz
+ * Fecha: 28/10/2026
+ * @author Nicolas Valencia
+ * Objetivo: vista galpon
  */
-public class JFrameShed extends javax.swing.JPanel {
+public class JFrameShed extends javax.swing.JFrame {
     
-        private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameShed.class.getName());
-
-        
-        public void fillTable()
-    {
-        DefaultTableModel model = new DefaultTableModel();
-        jTableSheds.setModel(model);
-        //columnas
-        model.addColumn("Id");
-        model.addColumn("Nombre");
-        model.addColumn("Departamento");
-        //filas
-        String[] row = new String[3];
-        for (Shed shed : ShedController.Sheds) {
-            row[0] = String.valueOf(shed.getId());
-            row[1] = shed.getShedStatus();
-            model.addRow(row);
-        }
-    }    
-        
-       public void fillComboSheds()
-    {
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        jComboBoxShedStatus.setModel(model);        
-        model.addAll(ShedController.Sheds);
-    }
-    
-
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameShed.class.getName());
+    private final IShedController shedController = new ShedController();
     /**
-     * Creates new form Shed
+     * Creates new form JFrameShed
      */
     public JFrameShed() {
         initComponents();
+        fillTable();
+    }
+    
+    public void fillTable()
+    {
+        DefaultTableModel model = new DefaultTableModel();
+        jTableSheds.setModel(model);
+        model.addColumn("Numero");
+        model.addColumn("Estado");
+        String[] rows = new String[2];
+        for (Shed s : ShedController.shedList) {
+            rows[0] = String.valueOf(s.getId());
+            rows[1] = s.getStatus();
+            model.addRow(rows);
+            
+        }
     }
 
     /**
@@ -60,170 +50,211 @@ public class JFrameShed extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButtonRegister = new javax.swing.JButton();
-        jButtonModify = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButtonInsert = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jButtonClean = new javax.swing.JButton();
-        jComboBoxShedStatus = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTableSheds = new javax.swing.JTable();
+        jTextFieldId = new javax.swing.JTextField();
+        jComboBoxStatus = new javax.swing.JComboBox<>();
 
-        jLabel1.setText("Numero Galpon");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        jButtonRegister.setText("Registrar");
-        jButtonRegister.addActionListener(this::jButtonRegisterActionPerformed);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Galpon");
+        setPreferredSize(new java.awt.Dimension(600, 619));
 
-        jButtonModify.setText("Modificar");
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("jLabel3");
+
+        jButtonInsert.setText("Crear");
+        jButtonInsert.addActionListener(this::jButtonInsertActionPerformed);
+
+        jButtonUpdate.setText("Modificar");
+        jButtonUpdate.setEnabled(false);
 
         jButtonDelete.setText("Eliminar");
+        jButtonDelete.setEnabled(false);
 
         jButtonClean.setText("Limpiar");
         jButtonClean.addActionListener(this::jButtonCleanActionPerformed);
 
-        jComboBoxShedStatus.setMaximumRowCount(2);
-        jComboBoxShedStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DISPONIBLE", "OCUPADO" }));
-
-        jLabel2.setText("Estatus Galpon");
-
-        jLabel3.setText("jLabel3");
-
         jTableSheds.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
-        jScrollPane1.setViewportView(jTableSheds);
+        jScrollPane2.setViewportView(jTableSheds);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        jTextFieldId.setText("jTextField1");
+
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(247, 247, 247))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(99, 99, 99)
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jButtonInsert)
+                        .addGap(46, 46, 46)
+                        .addComponent(jButtonUpdate)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButtonDelete)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButtonClean))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonInsert)
+                    .addComponent(jButtonUpdate)
+                    .addComponent(jButtonDelete)
+                    .addComponent(jButtonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonRegister)
-                                .addGap(60, 60, 60)
-                                .addComponent(jButtonModify))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonDelete)
-                                        .addGap(96, 96, 96)
-                                        .addComponent(jButtonClean))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jComboBoxShedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(105, 105, 105))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(137, 137, 137)
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(314, 314, 314)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 42, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3)
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxShedStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRegister)
-                    .addComponent(jButtonModify)
-                    .addComponent(jButtonDelete)
-                    .addComponent(jButtonClean))
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-        clean();
+          clear();
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
-    private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
+    private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
+        try {
             Shed shed = new Shed();
-            shed.setShedStatus(jComboBoxShedStatus.getItemAt(WIDTH));               
-    }             
-    }//GEN-LAST:event_jButtonRegisterActionPerformed
+            shed.setId(Integer.parseInt(jTextFieldId.getText()));
+            shed.setStatus(jComboBoxStatus.getSelectedItem().toString());
+            
+            shedController.insert(shed);
+        } catch (Exception ex) {
+            System.getLogger(JFrameShed.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_jButtonInsertActionPerformed
+
     
-    public void clean()
+    public void clear()
     {
         jTextFieldId.setText("");
-        jComboBoxShedStatus.setSelectedIndex(0);
+        jComboBoxStatus.setSelectedIndex(0);
         jTableSheds.clearSelection();
-        jButtonRegister.setEnabled(true);
-        jButtonModify.setEnabled(false);
+        jButtonInsert.setEnabled(true);
+        jButtonUpdate.setEnabled(false);
         jButtonDelete.setEnabled(false);
     }
     
-    private void jTableCitiesMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        int rowSelected = jTableCities.getSelectedRow();
-        if(rowSelected != -1)   //si hay fila seleccionada
-        {
-            jButtonInsert.setEnabled(false);
-            jButtonUpdate.setEnabled(true);
-            jButtonDelete.setEnabled(true);
-            
-            long idSelected = Long.parseLong(jTableCities.getValueAt(rowSelected, 0).toString());
-            
-            try {
-                //consultar la ciudad por id
-                Shed shed = ShedController.(idSelected);
-                jTextFieldId.setText(String.valueOf(city.getId()));
-                jTextFieldName.setText(city.getName());
-                jComboBoxDepartments.getModel().setSelectedItem(city.getDepartment());
-            } catch (Exception ex) {
-                MessageUtils.showError(ex.getMessage());
+    
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-    }                     
-    
-    
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new JFrameShed().setVisible(true));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClean;
     private javax.swing.JButton jButtonDelete;
-    private javax.swing.JButton jButtonModify;
-    private javax.swing.JButton jButtonRegister;
-    private javax.swing.JComboBox<String> jComboBoxShedStatus;
+    private javax.swing.JButton jButtonInsert;
+    private javax.swing.JButton jButtonUpdate;
+    private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableSheds;
     private javax.swing.JTextField jTextFieldId;
     // End of variables declaration//GEN-END:variables

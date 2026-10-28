@@ -9,105 +9,120 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Aprendiz
+ * Fecha: 28/10/2026
+ * @author Nicolas Valencia
+ * Objetivo: controlador galpon
  */
-public class ShedController implements IShedController {
+public class ShedController implements IShedController{
     
-    public static List<Shed> Sheds = new ArrayList<>();
-
+    public static List<Shed> shedList = new ArrayList<>();
 
     public ShedController() {
-    
-    Shed shed1 = new Shed (1, "Disponible");
-    Sheds.add(shed1);
-    Shed shed2 = new Shed (2, "Disponible");
-    Sheds.add(shed2);
+        shedList.add(new Shed(1, "DISPONIBLE"));
+        shedList.add(new Shed(2, "DISPONIBLE"));
+        shedList.add(new Shed(3, "OCUPADO"));
     }
     
     @Override
-    public void register(Shed shed) throws Exception {
-        if (shed == null) 
+    public void insert(Shed shed) throws Exception {
+        if (shed == null)
         {
             throw new Exception("El galpon esta vacio");
         }
-        if (shed.getId() == 0)
-        {
-            throw new Exception("El numero del galpon es obligatorio");
-        }
-        if (shed.getShedStatus() == null)
-        {
-            throw new Exception("EL Estaus del galpon es obligatorio");
-        }
-        Sheds.add(shed);
-    }
-    
-    
-
-    @Override
-    public void delete(int id) throws Exception {
-        for (Shed shed : Sheds){
-            if (shed.getId() == id)
-            {
-                Sheds.remove(shed);
-                break;
-            }
-        }
-    }
-    
-    @Override
-    public void modify (Shed shed) throws Exception {
-                if(Sheds == null)
-        {
-            throw new Exception("El departamento está vacío");
-        }
-        
         if(shed.getId() == 0)
         {
-            throw new Exception("El id es obligatorio");
+            throw new Exception("El numero es obligatorio");
         }
-        
-        if("".equals(shed.getShedStatus() == null))
+        if("".equals(shed.getStatus()))
         {
-            throw new Exception("El estatus es obligatorio");
+            throw new Exception("El estado es obligatorio");
         }
         
-        //validar si el departamento a actualizar existe        
-        boolean exists = false;
-        for (int i = 0; i < Sheds.size(); i++) {
-            if(Sheds.get(i).getId() == shed.getId())
-            {
-                Sheds.set(i, shed);
-                exists = true;
-                break;
-            }
+        shedList.add(shed);
+    }
+
+    @Override
+    public void update(Shed shed) throws Exception {
+        if (shed == null)
+        {
+            throw new Exception("El galpon esta vacio");
+        }
+        if(shed.getId() == 0)
+        {
+            throw new Exception("El numero es obligatorio");
+        }
+        if("".equals(shed.getStatus()))
+        {
+            throw new Exception("El estado es obligatorio");
+        }
+        
+        //verificar existencia del galpon a actualizar 
+            boolean exists = false;
+            for (int i = 0; i < shedList.size(); i++) {
+                 if(shedList.get(i).getId() == shed.getId())
+                 {
+                     shedList.set(i, shed); //actualizar
+                     exists = true;
+                     break;
+                 }
         }
         
         if(!exists)
         {
-            throw new Exception("No existe el departamento a actualizar");
-        }        
+            throw new Exception("El galpon no existe");
+        }
+        
     }
-          
-    
+
     @Override
-    public void clean (int id) throws Exception {
-        for (Shed shed : Sheds){
-            if (shed.getId() == id)
-            {
-                Sheds.clear();
-                break;
-            }
+    public void delete(int id) throws Exception {
+        if(id == 0)
+        {
+            throw new Exception("El numero es obligatorio");
+        }
+        
+        //verificar existencia del galpon a eliminar
+        boolean exists = false;
+        for (int i = 0; i < shedList.size(); i++) {
+             if(shedList.get(i).getId() == id)
+             {
+                 shedList.remove(i); //actualizar
+                 exists = true;
+                 break;
+             }
+        }
+        
+        if(!exists)
+        {
+            throw new Exception("El galpon no existe");
         }
     }
 
     @Override
-    public List<Shed> findAll() throws Exception {
-        return Sheds;
+    public Shed find(int id) throws Exception {
+        if(id == 0)
+        {
+            throw new Exception("El numero es obligatorio");
+        }
+        
+        Shed shed = null;
+        for (Shed s : shedList) {
+            if(s.getId() == id)
+            {
+                shed = s;
+            }
+        }
+        
+        return shed;
     }
-        
-        
 
+    @Override
+    public List<Shed> findAll() throws Exception {
+        return shedList;
+    }
+    
 }
+    
+
     
 

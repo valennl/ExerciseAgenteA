@@ -12,35 +12,35 @@ import java.util.List;
  */
 public class Shed {
     private int id;
-    private String shedStatus;
+    private String Status;
 
     public Shed() {
     }
 
     public Shed(int id, String shedStatus) {
         this.id = id;
-        this.shedStatus = shedStatus;
+        this.Status = shedStatus;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getShedStatus() {
-        return shedStatus;
+    public String getStatus() {
+        return Status;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setShedStatus(String shedStatus) {
-        this.shedStatus = shedStatus;
+    public void setStatus(String Status) {
+        this.Status = Status;
     }
 
     @Override
     public String toString() {
-        return id + shedStatus;
+        return id +"-"+ Status;
     }
 
     

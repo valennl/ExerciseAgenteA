@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Fecha: 22/10/2026
  * @author Nicolas Valencia
- * Objetivo: model shed
+ * Objetivo: interface shed
  */
 public interface IShedController {
-    public void register(Shed shed) throws Exception;
-    public void modify (Shed shed) throws Exception;
+    public void insert(Shed shed) throws Exception;
+    public void update (Shed shed) throws Exception;
     public void delete (int id) throws Exception;
-    public void clean (int id) throws Exception;
+    public Shed find(int id) throws Exception;
     public List<Shed> findAll() throws Exception;
 }
