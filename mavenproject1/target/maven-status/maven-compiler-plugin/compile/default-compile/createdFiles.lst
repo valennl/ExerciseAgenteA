@@ -1,7 +1,12 @@
+co\edu\sena\ExerciseAgenteA\controller\ILineController.class
 co\edu\sena\ExerciseAgenteA\views\JFrameShed.class
 co\edu\sena\ExerciseAgenteA\model\Shed.class
+co\edu\sena\ExerciseAgenteA\model\Line.class
 co\edu\sena\ExerciseAgenteA\views\JFrameShed$1.class
 co\edu\sena\ExerciseAgenteA\controller\ShedController.class
+co\edu\sena\ExerciseAgenteA\views\JFrameLine$1.class
+co\edu\sena\ExerciseAgenteA\views\JFrameLine.class
 co\edu\sena\ExerciseAgenteA\Data\DataStore.class
 co\edu\sena\ExerciseAgenteA\Utils\MessageUtils.class
 co\edu\sena\ExerciseAgenteA\controller\IShedController.class
+co\edu\sena\ExerciseAgenteA\controller\LineController.class

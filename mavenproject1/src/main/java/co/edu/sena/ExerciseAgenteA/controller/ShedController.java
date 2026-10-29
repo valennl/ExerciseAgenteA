@@ -58,6 +58,7 @@ public class ShedController implements IShedController{
                  if(shedList.get(i).getId() == shed.getId())
                  {
                      shedList.set(i, shed); //actualizar
+                     shed.setStatus(shed.getStatus().trim());
                      exists = true;
                      break;
                  }
