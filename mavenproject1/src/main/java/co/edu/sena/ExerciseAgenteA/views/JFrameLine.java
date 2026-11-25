@@ -121,6 +121,8 @@ public class JFrameLine extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableLine);
 
+        jTextFieldId.setEditable(false);
+
         jLabelLineName.setText("Nombre linea");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -140,8 +142,8 @@ public class JFrameLine extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabelLineId)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabelLineName)
                                 .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,9 +205,7 @@ public class JFrameLine extends javax.swing.JFrame {
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
         try {
             Line line = new Line();
-            line.setId(Integer.parseInt(jTextFieldId.getText()));
             line.setName(jTextFieldName.getText());
-            
             lineController.insert(line);
             MessageUtils.getInstance().showInfo("El registro fue creado exitosamente");
             clear();

@@ -7,6 +7,7 @@ package co.edu.sena.ExerciseAgenteA.controller;
 import co.edu.sena.ExerciseAgenteA.model.Line;
 import java.util.List;
 import co.edu.sena.ExerciseAgenteA.Data.DataStore;
+import co.edu.sena.ExerciseAgenteA.db.DBLine;
 
 /**
  * Fecha: 29/10/2026
@@ -14,7 +15,7 @@ import co.edu.sena.ExerciseAgenteA.Data.DataStore;
  * Objetivo: Controler linea
  */
 public class LineController implements ILineController {
-    
+    private DBLine dbline = new DBLine();
     public static List<Line> lineList = DataStore.getLineList();
 
     @Override
@@ -23,16 +24,12 @@ public class LineController implements ILineController {
         {
             throw new Exception("El galpon esta vacio");
         }
-         if(line.getId() == 0)
-        {
-            throw new Exception("El numero es obligatorio");
-        }
         if("".equals(line.getName()))
         {
             throw new Exception("El estado es obligatorio");
         }
         
-        lineList.add(line);
+        dbline.insert(line);
     }
 
     @Override
@@ -51,21 +48,14 @@ public class LineController implements ILineController {
         }
         
         //verificar existencia del galpon a actualizar 
-            boolean exists = false;
-            for (int i = 0; i < lineList.size(); i++) {
-                 if(lineList.get(i).getId() == line.getId())
-                 {
-                     line.setName(line.getName().trim());
-                     lineList.set(i, line); //actualizar
-                     exists = true;
-                     break;
-                 }
+        Line lineExist = find(line.getId());
+        
+        if(lineExist == null)
+        {
+            throw new Exception("No existe el registro a actualizar");
         }
         
-        if(!exists)
-        {
-            throw new Exception("El galpon no existe");
-        }
+        dbline.update(line);
     }
 
     @Override
@@ -99,20 +89,13 @@ public class LineController implements ILineController {
             throw new Exception("El numero es obligatorio");
         }
         
-        Line line = null;
-        for (Line s : lineList) {
-            if(s.getId() == id)
-            {
-                line = s;
-            }
-        }
         
-        return line;
+        return dbline.find(id);
     }
 
     @Override
     public List<Line> findAll() throws Exception {
-        return lineList;
+        return (List<Line>) dbline.find(0);
     }
     
 }
