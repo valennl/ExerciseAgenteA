@@ -32,15 +32,16 @@ public class JFrameShed extends javax.swing.JFrame {
     {
         DefaultTableModel model = new DefaultTableModel();
         jTableSheds.setModel(model);
-        model.addColumn("Numero");
+        model.addColumn("Id");
+        model.addColumn("Número");
         model.addColumn("Estado");
-        String[] rows = new String[2];
+        String[] rows = new String[3];
         try {
             for (Shed s : shedController.findAll()) {
                 rows[0] = String.valueOf(s.getId());
-                rows[1] = s.getStatus();
+                rows[1] = String.valueOf(s.getNumber());
+                rows[2] = s.getStatus();
                 model.addRow(rows);
-                
             }
         } catch (Exception ex) {
             MessageUtils.getInstance().showError(ex.getMessage());
@@ -68,8 +69,10 @@ public class JFrameShed extends javax.swing.JFrame {
         jButtonClean = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableSheds = new javax.swing.JTable();
-        jTextFieldId = new javax.swing.JTextField();
+        jTextFieldNumber = new javax.swing.JTextField();
         jComboBoxStatus = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldId = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,40 +128,41 @@ public class JFrameShed extends javax.swing.JFrame {
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DISPONIBLE", "OCUPADO" }));
 
+        jLabel1.setText("id");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(67, 67, 67)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(jButtonInsert)
-                                .addGap(46, 46, 46)
-                                .addComponent(jButtonUpdate)
-                                .addGap(50, 50, 50)
-                                .addComponent(jButtonDelete)
-                                .addGap(36, 36, 36)
-                                .addComponent(jButtonClean)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelShedNumber)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTitle)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabelShedStatus)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jButtonInsert)
+                        .addGap(46, 46, 46)
+                        .addComponent(jButtonUpdate)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButtonDelete)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButtonClean)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,19 +172,21 @@ public class JFrameShed extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelShedNumber)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelShedStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                    .addComponent(jLabelShedStatus)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonInsert)
                         .addComponent(jButtonUpdate)
                         .addComponent(jButtonDelete)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addGap(63, 63, 63))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,7 +210,8 @@ public class JFrameShed extends javax.swing.JFrame {
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
         try {
             Shed shed = new Shed();
-            shed.setId(Integer.parseInt(jTextFieldId.getText()));
+            shed.setId(Integer.parseInt(jTextFieldNumber.getText()));
+            shed.setNumber(Integer.parseInt(jTextFieldNumber.getText()));
             shed.setStatus(jComboBoxStatus.getSelectedItem().toString());
             
             shedController.insert(shed);
@@ -224,7 +231,7 @@ public class JFrameShed extends javax.swing.JFrame {
         if (option == JOptionPane.YES_OPTION)
         {
             try {
-                shedController.delete(Integer.parseInt(jTextFieldId.getText()));
+                shedController.delete(Integer.parseInt(jTextFieldNumber.getText()));
                 MessageUtils.getInstance().showInfo("Registro eliminado exitosamente");
                 clear();
                 fillTable();
@@ -242,11 +249,12 @@ public class JFrameShed extends javax.swing.JFrame {
             jButtonDelete.setEnabled(true);
             jButtonInsert.setEnabled(false);
             
-            int numberSelected = Integer.parseInt(jTableSheds.getValueAt(rowSelected, 0).toString());
+            int idSelected = Integer.parseInt(jTableSheds.getValueAt(rowSelected, 0).toString());
             try {
                 //consultar por id
-                Shed shed = shedController.find(numberSelected);
-                jTextFieldId.setText(String.valueOf(shed.getId()));
+                Shed shed = shedController.find(idSelected);
+                jTextFieldId.setText(String.valueOf(idSelected));
+                jTextFieldNumber.setText(String.valueOf(shed.getNumber()));
                 jComboBoxStatus.setSelectedItem(shed.getStatus());
             } catch (Exception ex) {
                 MessageUtils.getInstance().showError(ex.getMessage());
@@ -257,7 +265,8 @@ public class JFrameShed extends javax.swing.JFrame {
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         try {
             Shed shed = new Shed();
-            shed.setId(Integer.parseInt(jTextFieldId.getText()));
+            shed.setId(Integer.parseInt(jTextFieldNumber.getText()));
+            shed.setNumber(Integer.parseInt(jTextFieldNumber.getText()));
             shed.setStatus(jComboBoxStatus.getSelectedItem().toString());
 
             shedController.update(shed);
@@ -274,7 +283,7 @@ public class JFrameShed extends javax.swing.JFrame {
     
     public void clear()
     {
-        jTextFieldId.setText("");
+        jTextFieldNumber.setText("");
         jComboBoxStatus.setSelectedIndex(0);
         jTableSheds.clearSelection();
         jButtonInsert.setEnabled(true);
@@ -316,6 +325,7 @@ public class JFrameShed extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInsert;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBoxStatus;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelShedNumber;
     private javax.swing.JLabel jLabelShedStatus;
     private javax.swing.JLabel jLabelTitle;
@@ -325,5 +335,6 @@ public class JFrameShed extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableSheds;
     private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldNumber;
     // End of variables declaration//GEN-END:variables
 }

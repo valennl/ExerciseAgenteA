@@ -10,7 +10,7 @@ package co.edu.sena.ExerciseAgenteA.db;
  */
 public class TestConnection {
     public static void main(String[] args) {
-        DBconnection dbc = new DBconnection();
+        DBConnection dbc = new DBConnection();
         dbc.connect();
         dbc.disconnect();
     }

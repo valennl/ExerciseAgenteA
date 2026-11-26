@@ -15,7 +15,7 @@ import java.sql.Statement;
  * @author Nicolas Valencia
  * Objetivo: clase para conexion a base de datos
  */
-public class DBconnection {
+public class DBConnection {
     public static Connection connection;
     public static Statement statment;
     private final String HOST = "localhost";

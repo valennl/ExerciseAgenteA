@@ -12,39 +12,47 @@ import java.util.List;
  */
 public class Shed {
     private int id;
-    private String Status;
-
+    private int number;
+    private String status;
+    
     public Shed() {
-    }
-
-    public Shed(int id, String shedStatus) {
-        this.id = id;
-        this.Status = shedStatus;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getStatus() {
-        return Status;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setStatus(String Status) {
-        this.Status = Status;
+    public Shed(int id, int number, String status) {
+        this.id = id;
+        this.number = number;
+        this.status = status;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return id +"-"+ Status;
+        return number + " - " + status;
     }
 
-    
-    
     
 }
     

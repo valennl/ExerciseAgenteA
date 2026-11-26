@@ -9,6 +9,7 @@ import co.edu.sena.ExerciseAgenteA.model.Line;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * @author Nicolas Valencia
  * Objetivo: clase para conexion a tabla line
  */
-public class DBLine extends DBconnection{
+public class DBLine extends DBConnection{
     public void insert(Line line)
     {
         try {
@@ -75,9 +76,39 @@ public class DBLine extends DBconnection{
         }
     }
     
-    public Line find(int id)
+    public List<Line> findAll()
     {
         List<Line> result = new ArrayList<>();
+        try {
+            connect();
+            String query = "select * from line";
+            statment = connection.createStatement();
+            ResultSet resultSet = statment.executeQuery(query);
+            
+            while(resultSet.next())
+            {
+                Line line = new Line(resultSet.getInt("id"), resultSet.getString("name"));
+                result.add(line);
+            }
+            
+            resultSet.close();
+            
+        } catch (SQLException e) {
+            MessageUtils.getInstance().showError("Error al consultar las líneas " + e.getMessage());
+        }
+        finally
+        {
+            disconnect();
+        }
+        
+        return result;
+    }
+    
+    
+    
+    
+    public Line find(int id)
+    {
         
         Line line = null;
         try {
