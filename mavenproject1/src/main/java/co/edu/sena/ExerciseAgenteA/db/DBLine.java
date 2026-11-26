@@ -116,14 +116,14 @@ public class DBLine extends DBConnection{
             String query = "select * from line where id = ?";
             PreparedStatement ps = connection.prepareCall(query);
             ps.setInt(1, id);
-            ResultSet resulSet = ps.executeQuery(query);
+            ResultSet resultSet = ps.executeQuery(query);
             
-            if(resulSet.next())
+            if(resultSet.next())
             {
-                line = new Line(resulSet.getInt("id"), resulSet.getString("name"));
+                line = new Line(resultSet.getInt("id"), resultSet.getString("name"));
             }
             
-            resulSet.close();
+            resultSet.close();
             ps.close();
             
             
